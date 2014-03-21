@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet/less" type="text/css" href="/stylesheets/style.less">
+    <script src='/javascripts/libs/less-1.7.0.min.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src='/javascripts/libs/jquery.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src='/javascripts/main.js'></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1 class="span12 headName">Weather service</h1>
+        <div id="map-canvas" class="span12"></div>
+        <div class="shadowBottom"></div>
+        <div class="weather">
+          <ul class="weatherResult">
+            <li class="weatherPhoto"></li>
+            <li class="temperature">
+               +10<sup><small>0</small></sup>C
+            </li>
+            <li class="humidity">
+              humidity: <b>70%</b>
+            </li>
+            <li class="windSpeed">
+              wind speed: <b>27km\h</b>
+            </li>
+            <li class="windPoint">
+              wind point: <b>west south-west</b>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

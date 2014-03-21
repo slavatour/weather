@@ -1,0 +1,67 @@
+@mainFont: arial, georgia;
+@weatherSun: url('/images/weather_icons.png') 0px 0px;
+@weatherSunCloudy: url('/images/weather_icons.png') -55px 0px;
+@weatherSunRain: url('/images/weather_icons.png') -165px 0px;
+@weatherRain: url('/images/weather_icons.png') 0px -55px;
+@weatherStorm: url('/images/weather_icons.png') -55px -53px;
+@weatherSnow: url('/images/weather_icons.png') -110px -50px;
+@weatherCloudy: url('/images/weather_icons.png') -165px -50px;
+
+html, body, #map-canvas {
+	background: rgb(244, 244, 244);
+	height: 400px;
+	margin: 0px 20px 0px 20px;
+	padding: 0px;
+	font-family: @mainFont;
+	letter-spacing: 1px;
+	color: rgb(101, 101, 101);
+}
+
+.conteiner {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.headName {
+	text-align: center;
+}
+
+
+#map-canvas {
+	border: solid 1px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+}
+
+.shadowBottom {
+	background: url('/images/shadow_bottom.png');
+	height: 80px;
+	width: 1128px;
+	margin: -10px 20px 0px 20px;
+}
+
+.weather {
+	display: none;
+}
+
+.weatherResult {
+		height: auto;
+		width: 200px;
+		margin: 5px;
+		font-family: @mainFont;
+		list-style: none;
+		margin: 0px 0px;
+		padding: 0px 0px;
+		font-size: 12px;
+		li.weatherPhoto {
+			display: inline-block;
+			height: 50px;
+			width: 50px;
+			background: @weatherCloudy;
+		}
+		li.temperature {
+			display: inline-block;
+			font-size: 34px;
+			line-height: 50px;
+		}
+}
+ 
