@@ -11,6 +11,9 @@ var path = require('path');
 
 var app = express();
 
+
+var MarkersControllers = require('./controllers/MarkersControllers');
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -33,4 +36,27 @@ if ('development' == app.get('env')) {
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+
+
+
+var markersControllers = new MarkersControllers.MarkerController();
+
+
+app.get('/forcast/:latitude/:longitude', function (req, res) {
+	console.log(req.params.latitude);
+	res.header();
+	res.end();
+});
+
+app.get('/markers/:latitude/:longitude/:zoom', function (req, res) {
+	var latitude = req.params.latitude;
+	var longitude = req.params.longitude;
+	var zoom = req.params.zoom;
+	markersControllers.getMarkersCollection(latitude, longitude, zoom, function (data) {
+		console.log(data);
+		res.header();
+		res.end(JSON.stringify(data));
+	});
 });

@@ -1,5 +1,5 @@
 @mainFont: arial, georgia;
-@weatherSun: url('/images/weather_icons.png') 0px 0px;
+@weatherSun: url('/images/weather_icons1.png') 0px 0px;
 @weatherSunCloudy: url('/images/weather_icons.png') -55px 0px;
 @weatherSunRain: url('/images/weather_icons.png') -165px 0px;
 @weatherRain: url('/images/weather_icons.png') 0px -55px;
@@ -9,7 +9,7 @@
 
 html, body, #map-canvas {
 	background: rgb(244, 244, 244);
-	height: 400px;
+	height: 500px;
 	margin: 0px 20px 0px 20px;
 	padding: 0px;
 	font-family: @mainFont;
@@ -26,17 +26,41 @@ html, body, #map-canvas {
 	text-align: center;
 }
 
+#dateFrom, #dateTo {
+	position: relative;
+	z-index: 900;
+}
+
+.dateForm {
+	margin-left: 10px;
+}
+
+// .markerContainer {
+// 	color: rgb(0, 0, 0);
+// 	font-size: 18px;
+// 	text-shadow: 0px 0px 5px rgb(255, 255, 255);
+// 	margin: 0px 0px 10px 10px;
+// }
 
 #map-canvas {
 	border: solid 1px rgba(0, 0, 0, 0.2);
 	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+	z-index: 10;
+	margin-top: 10px;
+}
+
+.mainContainer {
+	position: relative;
 }
 
 .shadowBottom {
+	position: relative;
 	background: url('/images/shadow_bottom.png');
 	height: 80px;
 	width: 1128px;
-	margin: -10px 20px 0px 20px;
+	// margin: -10px 20px 0px 20px;
+	margin: -10px auto;
+	z-index: 1;
 }
 
 .weather {
@@ -54,8 +78,8 @@ html, body, #map-canvas {
 		font-size: 12px;
 		li.weatherPhoto {
 			display: inline-block;
-			height: 50px;
-			width: 50px;
+			height: 70px;
+			width: 70px;
 			background: @weatherCloudy;
 		}
 		li.temperature {
@@ -65,3 +89,134 @@ html, body, #map-canvas {
 		}
 }
  
+
+.settingsBar {
+	
+}
+
+
+.forcastBox {
+	border: solid 1px rgba(101, 101, 101, .3);
+	position: relative;
+	margin: 20px 20px;
+	padding: 0px;
+	.forcastBoxHeader {
+		font-size: 12px;
+		text-align: center;
+		border-bottom: solid 2px rgba(101, 101, 101, .1);
+		padding: 5px;
+	}
+	section {
+		padding: 20px;
+		.weatherImgBox {
+			display: block;
+			background: url("../images/weather_icons32.png") no-repeat;
+			height: 60px;
+			width: 80px;	
+			float: left;
+		}
+		.minTempPosition {
+			display: block;
+			line-height: 20px;
+			float: right;
+		}
+		.maxTempPosition {
+			display: block;
+			line-height: 20px;
+			float: right;
+		}
+		.description, .humidity, .windSpeed, .windPoint {
+			display: block;
+			line-height: 20px;
+			float: left;
+			width: 100%;
+		}
+		.description {
+			font-size: 12px;
+		}
+	}
+}
+
+
+
+.labels {
+	color: rgb(255, 0, 0);
+	font-family: "Lucida Grande", "Arial", sans-serif;
+	font-size: 16px;
+	text-shadow: 0px 0px 5px rgb(255, 255, 255);
+	font-weight: bold;
+	text-align: center;
+	z-index: 999;
+	width: 100px;     
+	white-space: nowrap;
+}
+
+.controls {
+	margin-top: 16px;
+	border: 1px solid rgba(0, 0, 0, .3);
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.controls:focus {
+	border-color: #4d90fe;
+    margin-left: -1px;
+    padding-left: 14px;  /* Regular padding-left + 1. */
+    width: 301px;
+}
+
+#pac-input, #pac-inputB {
+	background-color: #fff;
+	padding: 0 11px 0 13px;
+	width: 300px;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	text-overflow: ellipsis;
+	margin-left: 10px;
+}
+
+.pac-container {
+	font-family: Roboto;
+}
+
+#type-selector {
+	color: #fff;
+	background-color: #4d90fe;
+	padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 300;
+}
+
+ #target {
+	width: 345px;
+}
+
+.weatherIcon {
+	position: relative;
+	font-size: 14px;
+	font: bold;
+}
+
+.weatherImg {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background: url('/images/weather_icons2.png') 0px 0px no-repeat; 
+	width: 35px; 
+	height: 35px;
+}
+
+.currentTemperature {
+	position: absolute;
+	top: 15px;
+	left: 10px;
+}

@@ -1,44 +1,148 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="weatherApp">
   <head>
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet/less" type="text/css" href="/stylesheets/jquery-ui-1.10.4.custom.css">
     <link rel="stylesheet/less" type="text/css" href="/stylesheets/style.less">
-    <script src='/javascripts/libs/less-1.7.0.min.js'></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script src='/javascripts/libs/jquery.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src='/javascripts/main.js'></script>
+    
+    
   </head>
   <body>
-    <div class="container">
+    <div class="col-lg-container">
       <div class="row">
-        <h1 class="span12 headName">Weather service</h1>
-        <div id="map-canvas" class="span12"></div>
-        <div class="shadowBottom"></div>
-        <div class="weather">
-          <ul class="weatherResult">
-            <li class="weatherPhoto"></li>
-            <li class="temperature">
-               +10<sup><small>0</small></sup>C
-            </li>
-            <li class="humidity">
-              humidity: <b>70%</b>
-            </li>
-            <li class="windSpeed">
-              wind speed: <b>27km\h</b>
-            </li>
-            <li class="windPoint">
-              wind point: <b>west south-west</b>
-            </li>
-          </ul>
-
+        
+        <div id="mainContainer col-md-12">
+          <h2 class="span12 headName">Weather service</h2>
+        <!-- date contaoner -->
+          <div class="row dateForm">
+            <div class="col-xs-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                <input type="text" id="dateFrom" class="form-control" placeholder="set date from...">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                <input type="text" id="dateTo" class="form-control" placeholder="set date to...">
+              </div>
+            </div>
+          </div>
+          <!-- search inputs -->
+          <input id="pac-input" class="controls" type="text" placeholder="enter start point...">
+          <input id="pac-inputB" class="controls" type="text" placeholder="enter finish point...">
+          <!-- map container -->
+          <div id="map-canvas" class="span12"></div>
+          <div class="shadowBottom"></div>
         </div>
+
+
+
+        <!-- rigion box -->
+        <div id="mainDiv"></div>
+
+
+
+        <script type="text/template" id="markerForcast">
+            
+          <i>+</i>
+          <%= weatherCollection[0] %><sup><small>0</small></sup>C
+        
+        </script>
+
+        <script type="text/template" id="markerForcastColl">
+          <div></div>
+        </script>
+
+
+
+        <script type="text/template" id="forcastView">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#today" data-toggle="tab">Today</a></li>
+            <li><a href="#5days" data-toggle="tab">Next 5 days</a></li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content" id="weatherContent">
+              <div class="tab-pane fade in active" id="today"></div>
+              <div class="tab-pane" id="5days"></div>
+          </div>
+        </script>
+
+        <script type="text/template" id="forcastViewBody">
+            <div class="tab-pane fade in active" id="home"><%= humidity %></div>
+            <div class="tab-pane" id="home1"><%= humidity %></div>
+        </script>
+
+
+        <script type="text/template" id="forcastBoxTemplate">
+          <header class="forcastBoxHeader"><%= date %><br><%= dayTime %></header>
+          <section>
+            <i class="weatherImgBox"></i>
+            <div class="minTempPosition">min: <%= temp_min %><sup><small>0</small></sup>C</div>
+            <div class="maxTempPosition">max: <%= temp_max %><sup><small>0</small></sup>C</div>
+            <div class="description"><%= description %></div>
+            <div class="humidity">Humidity: <%= humidity %>%</div>
+            <div class="windSpeed">Wind speed: <%= wind_speed %>m/c</div>
+            <div class="windPoint">Wind point: <%= wind_point %></div>
+          </section>
+        </script>
+
+
+
+        <section class="forcastBoxTemplate col-lg-2" style="display: none">
+          <header class="forcastBoxHeader"><%= date %><br><%= dayTime %></header>
+          <section>
+            <i class="weatherImgBox"></i>
+            <div class="minTempPosition">min: <%= temp_min %><sup><small>0</small></sup>C</div>
+            <div class="maxTempPosition">max: <%= temp_max %><sup><small>0</small></sup>C</div>
+            <div class="description"><%= description %></div>
+            <div class="humidity">Humidity: <%= humidity %>%</div>
+            <div class="windSpeed">Wind speed: <%= wind_speed %>m/c</div>
+            <div class="windPoint">Wind point: <%= wind_point %></div>
+          </section>
+        </section>
       </div>
     </div>
+    
+    <script src='/javascripts/libs/less-1.7.0.min.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script src='/javascripts/libs/markerwithlabel.js'></script>
+    <script src='/javascripts/libs/jquery.js'></script>
+    <script src='/javascripts/libs/jquery-ui-1.10.4.custom.js'></script>
+    <script src='/javascripts/libs/underscore.js'></script>
+    <script src='/javascripts/libs/backbone.js'></script>
+    <script src='/javascripts/libs/backbone.marionette.js'></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <script src='/javascripts/main.js'></script>
+    <script src='/javascripts/maps.js'></script>
+    <script src='/javascripts/controllers/mapController.js'></script>
+    <script src='/javascripts/weather.js'></script>
+    <script src='/javascripts/models/weatherModel.js'></script>
+    <script src='/javascripts/collections/weatherCollection.js'></script>
+    <script src='/javascripts/models/markerModel.js'></script>
+    <script src='/javascripts/collections/markerCollection.js'></script>
+    <script src='/javascripts/views/weatherModelView.js'></script>
+    <script src='/javascripts/views/weatherCollectionView.js'></script>
+    <script src='/javascripts/views/markerModelView.js'></script>
+    <script src='/javascripts/views/markerCollectionView.js'></script>
+    <script src='/javascripts/controllers/markersController.js'></script>
+    <script src='/javascripts/controllers/weatherController.js'></script>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        App.start();
+      });
+
+    </script>
   </body>
 </html>
